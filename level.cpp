@@ -31,19 +31,24 @@ int level() {
 
     result = waveInOpen(&hWaveIn, WAVE_MAPPER, &pFormat, 0L, 0L, WAVE_FORMAT_DIRECT);
     if (result == MMSYSERR_ALLOCATED) {
-        std::cout << "Specified resource is already allocated." << std::endl;
+        Application->MessageBox(L"Specified resource is already allocated.", L"Error", MB_OK | MB_ICONERROR);
+        Application->Terminate();
     }
     if (result == MMSYSERR_BADDEVICEID) {
-        std::cout << "Specified device identifier is out of range." << std::endl;
+        Application->MessageBox(L"Specified device identifier is out of range.", L"Error", MB_OK | MB_ICONERROR);
+        Application->Terminate();
     }
     if (result == MMSYSERR_NODRIVER) {
-        std::cout << "No device driver is present." << std::endl;
+        Application->MessageBox(L"No device driver is present.", L"Error", MB_OK | MB_ICONERROR);
+        Application->Terminate();
     }
     if (result == MMSYSERR_NOMEM) {
-        std::cout << "Unable to allocate or lock memory." << std::endl;
+        Application->MessageBox(L"Unable to allocate or lock memory.", L"Error", MB_OK | MB_ICONERROR);
+        Application->Terminate();
     }
     if (result == WAVERR_BADFORMAT) {
-        std::cout << "Attempted to open with an unsupported waveform-audio format." << std::endl;
+        Application->MessageBox(L"Attempted to open with an unsupported waveform-audio format.", L"Error", MB_OK | MB_ICONERROR);
+        Application->Terminate();
     }
 
     WAVEHDR WaveInHdr;
@@ -59,28 +64,35 @@ int level() {
     // Insert a wave input buffer
     result = waveInAddBuffer(hWaveIn, &WaveInHdr, sizeof(WAVEHDR));
     if (result == MMSYSERR_INVALHANDLE) {
-        std::cout << "Specified device handle is invalid." << std::endl;
+        Application->MessageBox(L"Specified device handle is invalid.", L"Error", MB_OK | MB_ICONERROR);
+        Application->Terminate();
     }
     if (result == MMSYSERR_NODRIVER) {
-        std::cout << "No device driver is present." << std::endl;
+        Application->MessageBox(L"No device driver is present.", L"Error", MB_OK | MB_ICONERROR);
+        Application->Terminate();
     }
     if (result == MMSYSERR_NOMEM) {
-        std::cout << "Unable to allocate or lock memory." << std::endl;
+        Application->MessageBox(L"Unable to allocate or lock memory.", L"Error", MB_OK | MB_ICONERROR);
+        Application->Terminate();
     }
     if (result == WAVERR_UNPREPARED) {
-        std::cout << "The buffer pointed to by the pwh parameter hasn't been prepared." << std::endl;
+        Application->MessageBox(L"The buffer pointed to by the pwh parameter hasn't been prepared.", L"Error", MB_OK | MB_ICONERROR);
+        Application->Terminate();
     }
 
     // Commence sampling input
     result = waveInStart(hWaveIn);
     if (result == MMSYSERR_INVALHANDLE) {
-        std::cout << "Specified device handle is invalid." << std::endl;
+        Application->MessageBox(L"Specified device handle is invalid.", L"Error", MB_OK | MB_ICONERROR);
+        Application->Terminate();
     }
     if (result == MMSYSERR_NODRIVER) {
-        std::cout << "No device driver is present." << std::endl;
+        Application->MessageBox(L"No device driver is present.", L"Error", MB_OK | MB_ICONERROR);
+        Application->Terminate();
     }
     if (result == MMSYSERR_NOMEM) {
-        std::cout << "Unable to allocate or lock memory." << std::endl;
+        Application->MessageBox(L"Unable to allocate or lock memory.", L"Error", MB_OK | MB_ICONERROR);
+        Application->Terminate();
     }
 
     //cout << "recording..." << endl;
