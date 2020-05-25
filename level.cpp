@@ -29,8 +29,22 @@ int level() {
 
     // Specify recording parameters
 
-    result = waveInOpen(&hWaveIn, WAVE_MAPPER, &pFormat,
-                        0L, 0L, WAVE_FORMAT_DIRECT);
+    result = waveInOpen(&hWaveIn, WAVE_MAPPER, &pFormat, 0L, 0L, WAVE_FORMAT_DIRECT);
+    if (result == MMSYSERR_ALLOCATED) {
+        std::cout << "Specified resource is already allocated." << std::endl;
+    }
+    if (result == MMSYSERR_BADDEVICEID) {
+        std::cout << "Specified device identifier is out of range." << std::endl;
+    }
+    if (result == MMSYSERR_NODRIVER) {
+        std::cout << "No device driver is present." << std::endl;
+    }
+    if (result == MMSYSERR_NOMEM) {
+        std::cout << "Unable to allocate or lock memory." << std::endl;
+    }
+    if (result == WAVERR_BADFORMAT) {
+        std::cout << "Attempted to open with an unsupported waveform-audio format." << std::endl;
+    }
 
     WAVEHDR WaveInHdr;
     // Set up and prepare header for input
@@ -44,13 +58,38 @@ int level() {
 
     // Insert a wave input buffer
     result = waveInAddBuffer(hWaveIn, &WaveInHdr, sizeof(WAVEHDR));
+    if (result == MMSYSERR_INVALHANDLE) {
+        std::cout << "Specified device handle is invalid." << std::endl;
+    }
+    if (result == MMSYSERR_NODRIVER) {
+        std::cout << "No device driver is present." << std::endl;
+    }
+    if (result == MMSYSERR_NOMEM) {
+        std::cout << "Unable to allocate or lock memory." << std::endl;
+    }
+    if (result == WAVERR_UNPREPARED) {
+        std::cout << "The buffer pointed to by the pwh parameter hasn't been prepared." << std::endl;
+    }
 
     // Commence sampling input
     result = waveInStart(hWaveIn);
+    if (result == MMSYSERR_INVALHANDLE) {
+        std::cout << "Specified device handle is invalid." << std::endl;
+    }
+    if (result == MMSYSERR_NODRIVER) {
+        std::cout << "No device driver is present." << std::endl;
+    }
+    if (result == MMSYSERR_NOMEM) {
+        std::cout << "Unable to allocate or lock memory." << std::endl;
+    }
 
     //cout << "recording..." << endl;
 
-    Sleep(1 * 100.0);
+    Sleep(100);
+    while ((WaveInHdr.dwFlags & WHDR_DONE) == 0) {
+        std::cout << "Sleeping again ... " << std::endl;
+        Sleep(10);
+    }
     // Wait until finished recording
 
     waveInClose(hWaveIn);
@@ -96,6 +135,9 @@ int scaleBufferData(float dB) {
     const static double MAX_DB = 0;
 
     const int nPos = (int)(((double)dB - MIN_DB) * 100 / (MAX_DB - MIN_DB));
+
+    if (nPos < 0)
+        return 0;
 
     return nPos;
 }
