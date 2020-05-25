@@ -28,13 +28,17 @@ __fastcall MyThread::MyThread(bool CreateSuspended) : TThread(CreateSuspended) {
 void __fastcall MyThread::Execute() {
     NameThreadForDebugging(System::String(L"VolumeWarningThread"));
     //---- Place thread code here ----
-    for (int i = 0; i < 100; i++) {
+    while (true) {
+        int micLevel = level();
         Synchronize([&]() {
-            Form2->ProgressBar1->Position = level();
+            Form2->ProgressBar1->Position = micLevel;
         });
+        //Sleep(100);
     }
 }
 //---------------------------------------------------------------------------
+
+
 
 
 

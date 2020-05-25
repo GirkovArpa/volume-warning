@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <vector>
 #include <cmath>
+#include <mmeapi.h>
 using namespace std;
 
 short int waveIn[4410];
