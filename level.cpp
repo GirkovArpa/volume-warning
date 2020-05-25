@@ -4,13 +4,13 @@
 #include <cmath>
 using namespace std;
 
-short int waveIn[44100 * 1];
+short int waveIn[4410];
 
 float GetBufferData(short* buffer);
 int scaleBufferData(float dB);
 
 int level() {
-    const int NUMPTS = 44100 * 1;  // 3 seconds
+    const int NUMPTS = 4410;  // 3 seconds
     int sampleRate = 44100;
     // 'short int' is a 16-bit type; I request 16-bit samples below
     // for 8-bit capture, you'd use 'unsigned char' or 'BYTE' 8-bit     types
@@ -50,7 +50,7 @@ int level() {
 
     //cout << "recording..." << endl;
 
-    Sleep(1 * 1000);
+    Sleep(1 * 100.0);
     // Wait until finished recording
 
     waveInClose(hWaveIn);
@@ -79,11 +79,11 @@ float GetBufferData(short* buffer) {
 
     long long sum = 0;
 
-    for (int i = 0; i < 44100; i++) {
+    for (int i = 0; i < 4410; i++) {
         sum += abs(buffer[i]);
     }
 
-    float avg = sum / 44100;
+    float avg = sum / 4410;
 
     dB = (avg > 0) ? 20 * log10(avg / 32768) : -1000000;
 

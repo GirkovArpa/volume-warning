@@ -5,6 +5,9 @@
 // g++ main.cpp volume.cpp level.cpp -lwinmm
 
 int main() {
-    std::cout << "Volume: " << volume() << std::endl;
-    std::cout << "Level: " << level() << std::endl;
+    //std::cout << "Volume: " << volume() << std::endl;
+    //std::cout << "Level: " << level() << std::endl;
+    for (int i = 0; i < 100; i++) {
+        std::cout << "Level: " << level() << std::endl;
+    }
 }
