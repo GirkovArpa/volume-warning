@@ -108,7 +108,7 @@ int level() {
 
     Sleep(100);
     while ((WaveInHdr.dwFlags & WHDR_DONE) == 0)
-        Sleep(10)
+        Sleep(10);
 
             waveInClose(hWaveIn);
 
