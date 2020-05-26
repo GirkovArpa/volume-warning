@@ -20,3 +20,9 @@ __fastcall TForm2::TForm2(TComponent* Owner) : TForm(Owner) {
 
 
 
+void __fastcall TForm2::TrackBar1Change(TObject *Sender)
+{
+	Form2->Label2->Caption = IntToStr(100 - StrToInt(Form2->TrackBar1->Position));
+}
+//---------------------------------------------------------------------------
+

@@ -18,6 +18,8 @@ class TForm2 : public TForm {
 	TLabel *Label1;
 	TImage *Image1;
 	TMediaPlayer *MediaPlayer1;
+	TLabel *Label2;
+	void __fastcall TrackBar1Change(TObject *Sender);
 
 private:  // User declarations
 public:   // User declarations

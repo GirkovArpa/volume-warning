@@ -16,8 +16,8 @@ object Form2: TForm2
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 82
-    Top = 35
+    Left = 77
+    Top = 24
     Width = 31
     Height = 13
     Caption = 'Label1'
@@ -35,10 +35,17 @@ object Form2: TForm2
       1CC7711CC7711CC7711CC7711CC7711CC7711CC7711CC7711CC7711CC7711CC7
       711CC7711CC7715ECF02DCB236907C69C0390000000049454E44AE426082}
   end
+  object Label2: TLabel
+    Left = 40
+    Top = 24
+    Width = 31
+    Height = 13
+    Caption = 'Label2'
+  end
   object TrackBar1: TTrackBar
     Left = 40
     Top = 35
-    Width = 36
+    Width = 38
     Height = 305
     Max = 100
     Orientation = trVertical
@@ -47,6 +54,7 @@ object Form2: TForm2
     TabOrder = 0
     TabStop = False
     ThumbLength = 25
+    OnChange = TrackBar1Change
   end
   object MediaPlayer1: TMediaPlayer
     Left = 216
