@@ -16,7 +16,6 @@ int myCeiling;
 __fastcall TForm2::TForm2(TComponent* Owner) : TForm(Owner) {
     if (!FileExists("beep.wav")) {
         Application->MessageBox(L"Audio file \"beep.wave\" not found.", L"Error", MB_OK | MB_ICONERROR);
-        myThread->Suspend();
         Application->Terminate();
     }
     MediaPlayer1->FileName = "beep.wav";
