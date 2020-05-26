@@ -3,9 +3,9 @@ object Form2: TForm2
   Top = 0
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Form2'
+  Caption = 'VolumeWarning'
   ClientHeight = 374
-  ClientWidth = 389
+  ClientWidth = 519
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -36,7 +36,7 @@ object Form2: TForm2
       711CC7711CC7715ECF02DCB236907C69C0390000000049454E44AE426082}
   end
   object TrackBar1: TTrackBar
-    Left = 52
+    Left = 40
     Top = 35
     Width = 36
     Height = 305
@@ -47,5 +47,15 @@ object Form2: TForm2
     TabOrder = 0
     TabStop = False
     ThumbLength = 25
+  end
+  object MediaPlayer1: TMediaPlayer
+    Left = 216
+    Top = 200
+    Width = 253
+    Height = 30
+    EnabledButtons = [btPlay]
+    DoubleBuffered = True
+    ParentDoubleBuffered = False
+    TabOrder = 1
   end
 end

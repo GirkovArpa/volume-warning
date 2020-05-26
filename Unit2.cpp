@@ -11,7 +11,9 @@
 TForm2* Form2;
 //---------------------------------------------------------------------------
 __fastcall TForm2::TForm2(TComponent* Owner) : TForm(Owner) {
-    MyThread* myThread = new MyThread(false);
+    MediaPlayer1->FileName = "beep.wav";
+	MediaPlayer1->Open();
+	MyThread* myThread = new MyThread(false);
 }
 //---------------------------------------------------------------------------
 
