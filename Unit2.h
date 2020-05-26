@@ -15,11 +15,17 @@
 class TForm2 : public TForm {
     __published :  // IDE-managed Components
                    TTrackBar *TrackBar1;
-	TLabel *Label1;
-	TImage *Image1;
-	TMediaPlayer *MediaPlayer1;
-	TLabel *Label2;
-	void __fastcall TrackBar1Change(TObject *Sender);
+    TLabel *Label1;
+    TImage *Image1;
+    TMediaPlayer *MediaPlayer1;
+    TLabel *Label2;
+    TLabel *labelFloor;
+    TLabel *labelCeiling;
+    TTrackBar *sliderFloor;
+    TTrackBar *sliderCeiling;
+    void __fastcall TrackBar1Change(TObject *Sender);
+    void __fastcall sliderFloorChange(TObject *Sender);
+    void __fastcall sliderCeilingChange(TObject *Sender);
 
 private:  // User declarations
 public:   // User declarations
@@ -27,6 +33,8 @@ public:   // User declarations
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm2 *Form2;
+extern int myFloor;
+extern int myCeiling;
+extern MyThread* myThread;
 //---------------------------------------------------------------------------
 #endif
-

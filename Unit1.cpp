@@ -24,6 +24,10 @@
 
 __fastcall MyThread::MyThread(bool CreateSuspended) : TThread(CreateSuspended) {
 }
+
+int normalize(int value) {
+    return ((myCeiling - myFloor) * (value - 0)) / (100 - 0) + myFloor;
+}
 //---------------------------------------------------------------------------
 void __fastcall MyThread::Execute() {
     NameThreadForDebugging(System::String(L"VolumeWarningThread"));
@@ -46,7 +50,7 @@ void __fastcall MyThread::Execute() {
             Form2->Image1->Stretch = true;
             int imgHeight = 276;
             Form2->Image1->Height = (imgHeight / 100) * micLevel;
-            Form2->Image1->Top = 54 + (imgHeight - ((imgHeight / 100) * micLevel));
+            Form2->Image1->Top = 43 + (imgHeight - ((imgHeight / 100) * micLevel));
         });
     }
 }
