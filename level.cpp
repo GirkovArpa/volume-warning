@@ -33,27 +33,27 @@ int level() {
     result = waveInOpen(&hWaveIn, WAVE_MAPPER, &pFormat, 0L, 0L, WAVE_FORMAT_DIRECT);
     if (result == MMSYSERR_ALLOCATED) {
         Application->MessageBox(L"In function waveInOpen: Specified resource is already allocated.", L"Error", MB_OK | MB_ICONERROR);
-        MyThread->Suspend();
+        myThread->Suspend();
         Application->Terminate();
     }
     if (result == MMSYSERR_BADDEVICEID) {
         Application->MessageBox(L"In function waveInOpen: Specified device identifier is out of range.", L"Error", MB_OK | MB_ICONERROR);
-        MyThread->Suspend();
+        myThread->Suspend();
         Application->Terminate();
     }
     if (result == MMSYSERR_NODRIVER) {
         Application->MessageBox(L"In function waveInOpen: No device driver is present.", L"Error", MB_OK | MB_ICONERROR);
-        MyThread->Suspend();
+        myThread->Suspend();
         Application->Terminate();
     }
     if (result == MMSYSERR_NOMEM) {
         Application->MessageBox(L"In function waveInOpen: Unable to allocate or lock memory.", L"Error", MB_OK | MB_ICONERROR);
-        MyThread->Suspend();
+        myThread->Suspend();
         Application->Terminate();
     }
     if (result == WAVERR_BADFORMAT) {
         Application->MessageBox(L"In function waveInOpen: Attempted to open with an unsupported waveform-audio format.", L"Error", MB_OK | MB_ICONERROR);
-        MyThread->Suspend();
+        myThread->Suspend();
         Application->Terminate();
     }
 
@@ -70,39 +70,39 @@ int level() {
     result = waveInAddBuffer(hWaveIn, &WaveInHdr, sizeof(WAVEHDR));
     if (result == MMSYSERR_INVALHANDLE) {
         Application->MessageBox(L"In function waveInAddBuffer: Specified device handle is invalid.", L"Error", MB_OK | MB_ICONERROR);
-        MyThread->Suspend();
+        myThread->Suspend();
         Application->Terminate();
     }
     if (result == MMSYSERR_NODRIVER) {
         Application->MessageBox(L"In function waveInAddBuffer: No device driver is present.", L"Error", MB_OK | MB_ICONERROR);
-        MyThread->Suspend();
+        myThread->Suspend();
         Application->Terminate();
     }
     if (result == MMSYSERR_NOMEM) {
         Application->MessageBox(L"In function waveInAddBuffer: Unable to allocate or lock memory.", L"Error", MB_OK | MB_ICONERROR);
-        MyThread->Suspend();
+        myThread->Suspend();
         Application->Terminate();
     }
     if (result == WAVERR_UNPREPARED) {
         Application->MessageBox(L"In function waveInAddBuffer: The buffer pointed to by the pwh parameter hasn't been prepared.", L"Error", MB_OK | MB_ICONERROR);
-        MyThread->Suspend();
+        myThread->Suspend();
         Application->Terminate();
     }
 
     result = waveInStart(hWaveIn);
     if (result == MMSYSERR_INVALHANDLE) {
         Application->MessageBox(L"In function waveInStart: Specified device handle is invalid.", L"Error", MB_OK | MB_ICONERROR);
-        MyThread->Suspend();
+        myThread->Suspend();
         Application->Terminate();
     }
     if (result == MMSYSERR_NODRIVER) {
         Application->MessageBox(L"In function waveInStart: No device driver is present.", L"Error", MB_OK | MB_ICONERROR);
-        MyThread->Suspend();
+        myThread->Suspend();
         Application->Terminate();
     }
     if (result == MMSYSERR_NOMEM) {
         Application->MessageBox(L"In function waveInStart: Unable to allocate or lock memory.", L"Error", MB_OK | MB_ICONERROR);
-        MyThread->Suspend();
+        myThread->Suspend();
         Application->Terminate();
     }
 
