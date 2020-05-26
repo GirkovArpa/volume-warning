@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <vector>
 #include <cmath>
-#include <mmeapi.h>
+#include <chrono>
 
 using namespace std;
 
@@ -12,8 +12,9 @@ float GetBufferData(short* buffer);
 int scaleBufferData(float dB);
 
 int level() {
+    while (1) {
     const int NUMPTS = 4410;  // 3 seconds
-    int sampleRate = 44100;
+    int sampleRate = 4410;
     // 'short int' is a 16-bit type; I request 16-bit samples below
     // for 8-bit capture, you'd use 'unsigned char' or 'BYTE' 8-bit     types
 
@@ -33,24 +34,19 @@ int level() {
 
     result = waveInOpen(&hWaveIn, WAVE_MAPPER, &pFormat, 0L, 0L, WAVE_FORMAT_DIRECT);
     if (result == MMSYSERR_ALLOCATED) {
-        Application->MessageBox(L"Specified resource is already allocated.", L"Error", MB_OK | MB_ICONERROR);
-        Application->Terminate();
+        std::cout << "Specified resource is already allocated." << std::endl;
     }
     if (result == MMSYSERR_BADDEVICEID) {
-        Application->MessageBox(L"Specified device identifier is out of range.", L"Error", MB_OK | MB_ICONERROR);
-        Application->Terminate();
+        std::cout << "Specified device identifier is out of range." << std::endl;
     }
     if (result == MMSYSERR_NODRIVER) {
-        Application->MessageBox(L"No device driver is present.", L"Error", MB_OK | MB_ICONERROR);
-        Application->Terminate();
+        std::cout << "No device driver is present." << std::endl;
     }
     if (result == MMSYSERR_NOMEM) {
-        Application->MessageBox(L"Unable to allocate or lock memory.", L"Error", MB_OK | MB_ICONERROR);
-        Application->Terminate();
+        std::cout << "Unable to allocate or lock memory." << std::endl;
     }
     if (result == WAVERR_BADFORMAT) {
-        Application->MessageBox(L"Attempted to open with an unsupported waveform-audio format.", L"Error", MB_OK | MB_ICONERROR);
-        Application->Terminate();
+        std::cout << "Attempted to open with an unsupported waveform-audio format." << std::endl;
     }
 
     WAVEHDR WaveInHdr;
@@ -66,49 +62,49 @@ int level() {
     // Insert a wave input buffer
     result = waveInAddBuffer(hWaveIn, &WaveInHdr, sizeof(WAVEHDR));
     if (result == MMSYSERR_INVALHANDLE) {
-        Application->MessageBox(L"Specified device handle is invalid.", L"Error", MB_OK | MB_ICONERROR);
-        Application->Terminate();
+        std::cout << "Specified device handle is invalid." << std::endl;
     }
     if (result == MMSYSERR_NODRIVER) {
-        Application->MessageBox(L"No device driver is present.", L"Error", MB_OK | MB_ICONERROR);
-        Application->Terminate();
+        std::cout << "No device driver is present." << std::endl;
     }
     if (result == MMSYSERR_NOMEM) {
-        Application->MessageBox(L"Unable to allocate or lock memory.", L"Error", MB_OK | MB_ICONERROR);
-        Application->Terminate();
+        std::cout << "Unable to allocate or lock memory." << std::endl;
     }
     if (result == WAVERR_UNPREPARED) {
-        Application->MessageBox(L"The buffer pointed to by the pwh parameter hasn't been prepared.", L"Error", MB_OK | MB_ICONERROR);
-        Application->Terminate();
+        std::cout << "The buffer pointed to by the pwh parameter hasn't been prepared." << std::endl;
     }
 
     // Commence sampling input
     result = waveInStart(hWaveIn);
     if (result == MMSYSERR_INVALHANDLE) {
-        Application->MessageBox(L"Specified device handle is invalid.", L"Error", MB_OK | MB_ICONERROR);
-        Application->Terminate();
+        std::cout << "Specified device handle is invalid." << std::endl;
     }
     if (result == MMSYSERR_NODRIVER) {
-        Application->MessageBox(L"No device driver is present.", L"Error", MB_OK | MB_ICONERROR);
-        Application->Terminate();
+        std::cout << "No device driver is present." << std::endl;
     }
     if (result == MMSYSERR_NOMEM) {
-        Application->MessageBox(L"Unable to allocate or lock memory.", L"Error", MB_OK | MB_ICONERROR);
-        Application->Terminate();
+        std::cout << "Unable to allocate or lock memory." << std::endl;
     }
 
     //cout << "recording..." << endl;
-
+ 
+    // do something
+    auto t_start = std::chrono::high_resolution_clock::now();
     Sleep(100);
     while ((WaveInHdr.dwFlags & WHDR_DONE) == 0) {
         //std::cout << "Sleeping again ... " << std::endl;
         Sleep(10);
     }
+    auto t_end = std::chrono::high_resolution_clock::now();
+
+    double elapsed_time_ms = std::chrono::duration<double, std::milli>(t_end - t_start).count();
+    std::cout << elapsed_time_ms << std::endl;
     // Wait until finished recording
 
     waveInClose(hWaveIn);
 
-    return scaleBufferData(GetBufferData(waveIn));
+    std::cout << scaleBufferData(GetBufferData(waveIn)) << std::endl;
+    }
 
     /*
     std::cout << "dB: " << GetBufferData(waveIn) << std::endl;
@@ -167,7 +163,7 @@ int scaleBufferData(float dB) {
     const static double MIN_DB = 20 * log10(1.0 / REFERENCE);
     const static double MAX_DB = 0;
 
-     int nPos = (int)(((double)dB - MIN_DB) * 100 / (MAX_DB - MIN_DB));
+    int nPos = (int)(((double)dB - MIN_DB) * 100 / (MAX_DB - MIN_DB));
 
     if (nPos < 0)
         return 0;

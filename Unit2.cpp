@@ -12,9 +12,9 @@ TForm2* Form2;
 //---------------------------------------------------------------------------
 __fastcall TForm2::TForm2(TComponent* Owner) : TForm(Owner) {
     MyThread* myThread = new MyThread(false);
-    ProgressBar1->Position = 50;
 }
 //---------------------------------------------------------------------------
+
 
 
 

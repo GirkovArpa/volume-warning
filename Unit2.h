@@ -8,11 +8,14 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.ComCtrls.hpp>
+#include <Vcl.ExtCtrls.hpp>
+#include <Vcl.Imaging.pngimage.hpp>
 //---------------------------------------------------------------------------
 class TForm2 : public TForm {
     __published :  // IDE-managed Components
                    TTrackBar *TrackBar1;
-    TProgressBar *ProgressBar1;
+	TLabel *Label1;
+	TImage *Image1;
 
 private:  // User declarations
 public:   // User declarations
